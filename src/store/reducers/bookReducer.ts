@@ -1,0 +1,28 @@
+import { createReducer } from '@reduxjs/toolkit';
+import {  fetchBooks } from '@store/actions/books';
+import { Books } from 'types/book';
+
+const initialState: {
+  books: Books | null;
+  loading: boolean;
+  error: string | null;
+} = {
+  books: null,
+  loading: false,
+  error: null
+};
+
+const booksReducer = createReducer(initialState, builder => {
+  builder
+    .addCase(fetchBooks.fulfilled, (state, action) => {
+      state.books = action.payload;
+      state.loading = false;
+      state.error = null
+    })
+    .addCase(fetchBooks.pending, state => {
+      state.loading = true;
+      state.error = null;
+    });
+});
+
+export default booksReducer;

@@ -1,40 +1,57 @@
-import React, {ChangeEvent} from 'react'
-import axios from 'axios'
-import './SearchInput.css'
+import Button from '@components/Button/Button';
+import { fetchBooks } from '@store/actions/books';
+import { useAppDispatch, useAppSelector } from '@store/index';
+import React, { ChangeEvent } from 'react';
+import './SearchInput.css';
 
 interface SearchInputProps {
-  setResponse: Function
+  setResponse: Function;
 }
 
-const SearchInput = ({setResponse}: SearchInputProps) => {
-  const [searchValue, setSearchValue] = React.useState('')
+const SearchInput = ({ setResponse }: SearchInputProps) => {
+  const dispatch = useAppDispatch();
+  const { books } = useAppSelector(state => state.books);
+
+  const [searchValue, setSearchValue] = React.useState('');
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
-    setSearchValue(event.target.value)
+    setSearchValue(event.target.value);
   }
 
-  function getBooks(title: string = 'javascript') {
-    axios.get(`https://www.googleapis.com/books/v1/volumes?q=${title}`)
-      .then((response) => setResponse(response))
-  }
+  const getBooks = async (title: string = 'javascript') => {
+    await dispatch(fetchBooks(title));
+  };
 
   React.useEffect(() => {
-    getBooks()
-  }, [])
+    if (books?.items) {
+      setResponse({
+        data: {
+          items: books.items
+        }
+      });
+    }
+  }, [books, setResponse]);
+
+  React.useEffect(() => {
+    getBooks();
+  }, []);
 
   return (
-    <div className="search">
-      <h1>GOOGLE BOOKS</h1>
-      <input
-	className="search-input"
-	type="text"
-	placeholder="Buscar un libro"
-	value={searchValue}
-	onChange={handleInputChange}
-      />
-      <button className="search-button" onClick={() => getBooks(searchValue)}>Buscar</button>
+    <div className='w-full dark:bg-gray-400 flex items-center justify-center py-6'>
+      <div className='w-full max-w-[960px] flex grid grid-cols-400px auto-1fr 140px gap-6 px-6'>
+        <input
+          className='search-input'
+          type='text'
+          placeholder='Buscar un libro'
+          value={searchValue}
+          onChange={handleInputChange}
+        />
+        <Button variant='primary' onClick={() => getBooks(searchValue)}>
+          Buscar
+        </Button>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default SearchInput
+export default SearchInput;

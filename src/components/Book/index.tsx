@@ -1,29 +1,30 @@
-import React from 'react'
-import './book.css'
+import React from 'react';
+import { ItemBook } from 'types/book';
+import './book.css';
 
-export type BookType = {
-  id: string
-  volumeInfo: {
-    title: string
-    imageLinks: {
-      thumbnail: string
-    }
-  }
-}
 export interface BookProps {
-  book: BookType
+  book: ItemBook;
 }
 
 const Book = ({ book }: BookProps) => (
-  <div className="book">
-    <div className="book-image">
-      {book.volumeInfo.imageLinks ? <img
-	alt={book.volumeInfo.title}
-	src={book.volumeInfo.imageLinks.thumbnail}/>
-	: <img src="https://picsum.photos/200/260" alt="default" />}
+  <div className='moleskine-wrapper rounded-md'>
+    <div className='moleskine-notebook rounded-md'>
+      <div className='notebook-cover blue'>
+        <div className='notebook-skin'>
+          {book.volumeInfo.imageLinks ? (
+            <img
+              alt={book.volumeInfo.title}
+              src={book.volumeInfo.imageLinks.thumbnail}
+              className='rounded-md w-full'
+            />
+          ) : (
+            <img src='https://picsum.photos/200/260' alt='default' />
+          )}
+        </div>
+      </div>
+      <div className='notebook-page dotted'></div>
     </div>
-    <p className="book-title">{book.volumeInfo.title}</p>
   </div>
-)
+);
 
-export default Book
+export default Book;
