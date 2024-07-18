@@ -23,7 +23,7 @@ const BooksList = () => {
           <Loading rows={5} columns={5} width={150} height={200} padding={20} />
         </div>
       )}
-      {response?.data && <Books books={response.data.items} />}
+      {response?.data && <Books allowAddFavorites={false} books={response.data.items} />}
     </>
   );
 };

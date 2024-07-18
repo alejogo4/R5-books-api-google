@@ -4,7 +4,7 @@ import {
   getCommentsByBookId
 } from '@store/actions/commentsActions';
 
-interface CommentsState {
+export interface CommentsState {
   [key: string]: string[];
 }
 

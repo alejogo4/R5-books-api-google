@@ -1,8 +1,7 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { searchBooks } from 'http/books/books';
 import { searchBooks as searchCustomBooks } from 'http/custom-books/custom-books';
-import { Books } from 'types/book';
-
+import { Books, ItemBook } from 'types/book';
 
 export const fetchBooks = createAsyncThunk<Books | null, string>(
   'books/fetch-books',
@@ -27,3 +26,5 @@ export const fetchCustomBooks = createAsyncThunk<Books | null, string>(
     }
   }
 );
+
+export const setBookDetail = createAction<ItemBook>('books/set-book');
