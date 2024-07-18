@@ -12,7 +12,8 @@ const CustomBooks = () => {
 
   React.useEffect(() => {
     getBooks();
-  }, [getBooks]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
