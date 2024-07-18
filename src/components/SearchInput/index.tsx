@@ -1,40 +1,22 @@
 import Button from '@components/Button/Button';
-import { fetchBooks } from '@store/actions/books';
-import { useAppDispatch, useAppSelector } from '@store/index';
+import { setSearchTerm } from '@store/actions/searchActions';
+import { useAppDispatch } from '@store/index';
 import React, { ChangeEvent } from 'react';
 import './SearchInput.css';
 
-interface SearchInputProps {
-  setResponse: Function;
-}
 
-const SearchInput = ({ setResponse }: SearchInputProps) => {
+const SearchInput = () => {
   const dispatch = useAppDispatch();
-  const { books } = useAppSelector(state => state.books);
-
   const [searchValue, setSearchValue] = React.useState('');
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
     setSearchValue(event.target.value);
   }
 
-  const getBooks = async (title: string = 'javascript') => {
-    await dispatch(fetchBooks(title));
-  };
+  const handleSearchBooks = ()=>{
+    dispatch(setSearchTerm(searchValue));
+  }
 
-  React.useEffect(() => {
-    if (books?.items) {
-      setResponse({
-        data: {
-          items: books.items
-        }
-      });
-    }
-  }, [books, setResponse]);
-
-  React.useEffect(() => {
-    getBooks();
-  }, []);
 
   return (
     <div className='w-full dark:bg-gray-400 flex items-center justify-center py-6'>
@@ -46,7 +28,7 @@ const SearchInput = ({ setResponse }: SearchInputProps) => {
           value={searchValue}
           onChange={handleInputChange}
         />
-        <Button variant='primary' onClick={() => getBooks(searchValue)}>
+        <Button variant='primary' onClick={handleSearchBooks}>
           Buscar
         </Button>
       </div>

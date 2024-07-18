@@ -2,13 +2,12 @@ import Books from '@components/Books';
 import Loading from '@components/Loading/Loading';
 import SearchInput from '@components/SearchInput';
 import useSearchBooks from '@screens/hooks/useSearchBooks';
-import { fetchBooks } from '@store/actions/books';
+import { fetchCustomBooks } from '@store/actions/books';
 import React from 'react';
 
-
-const BooksList = () => {
+const CustomBooks = () => {
   const { response, loading, getBooks } = useSearchBooks({
-    fetchBooksAction: fetchBooks
+    fetchBooksAction: fetchCustomBooks
   });
 
   React.useEffect(() => {
@@ -23,9 +22,9 @@ const BooksList = () => {
           <Loading rows={5} columns={5} width={150} height={200} padding={20} />
         </div>
       )}
-      {response?.data && <Books books={response.data.items} />}
+      {response?.data && <Books allowAddFavorites={true} books={response.data.items} />}
     </>
   );
 };
 
-export default BooksList;
+export default CustomBooks;

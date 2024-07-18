@@ -1,14 +1,19 @@
+import Layout from '@components/Layout/Layout';
 import BooksList from '@screens/books/books';
+import CustomBooks from '@screens/customBooks/customBooks';
+import Favorites from '@screens/favorites/favorites';
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<BooksList />} />
-         <Route path='/' element={<BooksList />} />
+        <Route element={<Layout />}>
+          <Route path='/' element={<BooksList />} />
+          <Route path='/bookstore' element={<CustomBooks />} />
+          <Route path='/favorites' element={<Favorites />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
