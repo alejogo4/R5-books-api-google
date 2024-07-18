@@ -1,23 +1,17 @@
-import React from 'react'
-import SearchInput from './components/SearchInput'
-import {BookType} from './components/Book'
-import Books from './components/Books'
+import BooksList from '@screens/books/books';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-interface Response {
-  data?: {
-    items: BookType[]
-  }
-}
 
-const App = () =>  {
-  const [response, setResponse] = React.useState<Response>({})
+const App: React.FC = () => {
   return (
-    <div>
-      <SearchInput setResponse={setResponse} />
-	{response.data && <Books books={response.data.items} /> }
-    </div>
-  )
-}
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<BooksList />} />
+         <Route path='/' element={<BooksList />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
-
-export default App
+export default App;
