@@ -30,6 +30,7 @@ const useSearchBooks = ({
     if (term) {
       getBooks(term);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [term]);
 
   useEffect(() => {

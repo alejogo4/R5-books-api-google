@@ -12,7 +12,7 @@ const CustomBooks = () => {
 
   React.useEffect(() => {
     getBooks();
-  }, []);
+  }, [getBooks]);
 
   return (
     <>

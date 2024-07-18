@@ -13,7 +13,7 @@ const BooksList = () => {
 
   React.useEffect(() => {
     getBooks();
-  }, []);
+  }, [getBooks]);
 
   return (
     <>
