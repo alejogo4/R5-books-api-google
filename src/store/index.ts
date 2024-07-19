@@ -10,7 +10,7 @@ const persistConfig = {
   whitelist: ['comments','user']
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+export const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,

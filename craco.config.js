@@ -8,4 +8,13 @@ module.exports = {
       '@screens': path.resolve(__dirname, 'src/screens'),
     },
   },
+  jest: {
+    configure: {
+      moduleNameMapper: {
+        '^@components/(.*)$': '<rootDir>/src/components/$1',
+        '^@store/(.*)$': '<rootDir>/src/store/$1',
+        '^@screens/(.*)$': '<rootDir>/src/screens/$1',
+      },
+    },
+  },
 };

@@ -19,7 +19,7 @@ const Book = ({ book, allowAddFavorites }: BookProps) => {
   };
 
   return (
-    <div className='moleskine-wrapper rounded-md'>
+    <div className='moleskine-wrapper rounded-md' data-testid='book'>
       <div className='moleskine-notebook rounded-md relative'>
         <Link
           onClick={onHandleSetBook}
@@ -38,6 +38,7 @@ const Book = ({ book, allowAddFavorites }: BookProps) => {
             ) : (
               <img src='https://picsum.photos/200/260' alt='default' />
             )}
+            <p>{book.volumeInfo.title}</p>
           </div>
         </Link>
         <div className='notebook-page dotted'>

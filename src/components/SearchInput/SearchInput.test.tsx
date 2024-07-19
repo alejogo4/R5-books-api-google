@@ -1,54 +1,53 @@
-import React from 'react'
-import {render, waitFor, fireEvent, screen} from '@testing-library/react'
-import axiosMock from 'axios'
-import SearchInput from './'
 
-const book = {
-  id: 'SqikDwAAQBAJ',
-  volumeInfo: {
-    title: 'JavaScript - Aprende a programar en el lenguaje de la web',
-    authors: ["Fernando Luna"],
-    publishedDate: "2019-07-23",
-    imageLinks: {
-      "smallThumbnail": "http://books.google.com/books/content?id=SqikDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-      "thumbnail": "http://books.google.com/books/content?id=SqikDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
-    },
-  }
-}
-
-test('SearchInput: Should get books when SearchInput is mounted' ,async () => {
-  const setResponse = jest.fn()
-  const books = {items: [book]}
-  const response = {data: books}
-  axiosMock.get.mockResolvedValue(response)
-
-  render(<SearchInput setResponse={setResponse} />)
-  await waitFor(() => {
-    expect(setResponse).toBeCalledWith(response)
-  })
-
-})
+import { fireEvent, render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
+import { setSearchTerm } from './../../store/actions/searchActions';
+import SearchInput from './index';
 
 
-test('SearchInput: Should get books when click on Buscar', async () => {
-  const setResponse = jest.fn()
-  const books = {items: [book]}
-  const response = {data: books}
-  axiosMock.get.mockResolvedValue(response)
 
-  render(<SearchInput setResponse={setResponse} />)
-  await waitFor(() => {
-    expect(setResponse).toBeCalledWith(response)
-  })
+const middlewares = [];
+const mockStore = configureStore(middlewares);
 
-  fireEvent.change(screen.getByPlaceholderText(/Buscar/i),
-    { target: { value: 'javascript' } }
-  )
+describe('SearchInput: Suite', () => {
+  test('SearchInput: Dispatches value action when button is clicked', () => {
+   
+    const store = mockStore({});
+    store.dispatch = jest.fn();
 
-  fireEvent.click(screen.getByText('Buscar'))
+    
+    render(
+      <Provider store={store}>
+        <SearchInput />
+      </Provider>
+    );
 
-  await waitFor(() => {
-    expect(setResponse).toBeCalledTimes(2)
-  })
+    
+    const input = screen.getByPlaceholderText('Buscar un libro');
+    const button = screen.getByText('Buscar');
+    
+    fireEvent.change(input, { target: { value: 'Harry Potter' } });
+    
+    fireEvent.click(button);
+    expect(store.dispatch).toHaveBeenCalledWith(setSearchTerm('Harry Potter'));
+  });
 
-})
+  test('SearchInput: Updates input value when typed', () => {
+    const store = mockStore({});
+
+    render(
+      <Provider store={store}>
+        <SearchInput />
+      </Provider>
+    );
+
+    const input = screen.getByPlaceholderText(
+      'Buscar un libro'
+    ) as HTMLInputElement;
+
+    fireEvent.change(input, { target: { value: 'Harry Potter' } });
+
+    expect(input.value).toBe('Harry Potter');
+  });
+});

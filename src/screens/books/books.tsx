@@ -20,7 +20,7 @@ const BooksList = () => {
     <>
       <SearchInput />
       {loading && (
-        <div className='flex items-center justify-center py-6'>
+        <div className='flex items-center justify-center py-6' data-testid='loading'>
           <Loading rows={5} columns={5} width={150} height={200} padding={20} />
         </div>
       )}
