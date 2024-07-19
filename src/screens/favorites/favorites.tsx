@@ -11,6 +11,16 @@ const Favorites = () => {
     return Object.values(favoriteBooks);
   }, [favoriteBooks]);
 
+  if (favoriteBooksArray.length === 0) {
+    return (
+      <div className='max-w-4xl mx-auto my-6 bg-white shadow-2xl rounded-lg overflow-hidden'>
+        <div className='p-4 text-gray-700'>
+          No favorites yet. Add the first book here!
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <SearchInput />

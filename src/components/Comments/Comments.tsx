@@ -10,7 +10,7 @@ const CommentsList: React.FC<CommentProps> = ({ bookId }) => {
   const state = useAppSelector(state => state.comments);
 
   const getCommentsById = (state: CommentsState, id: string): string[] => {
-    return state[id] || []; // Devuelve el array de comentarios para el ID especificado, o un array vacío si no existe
+    return state[id] || [];
   };
 
   const comments = getCommentsById(state, bookId);

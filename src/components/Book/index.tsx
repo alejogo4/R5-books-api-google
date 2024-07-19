@@ -1,8 +1,7 @@
+import FavoriteButton from '@components/Favorite/Favorite';
 import { setBookDetail } from '@store/actions/books';
-import { toggleFavoriteBook } from '@store/actions/userActions';
-import { useAppDispatch, useAppSelector } from '@store/index';
-import React, { useEffect, useState } from 'react';
-import { MdFavoriteBorder, MdOutlineFavorite } from 'react-icons/md';
+import { useAppDispatch } from '@store/index';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { ItemBook } from 'types/book';
 import './book.css';
@@ -13,31 +12,20 @@ export interface BookProps {
 }
 
 const Book = ({ book, allowAddFavorites }: BookProps) => {
-  const [favorite, setFavorite] = useState(false);
   const dispatch = useAppDispatch();
-  const { favoriteBooks } = useAppSelector(state => state.user);
-
-  const onHandleFavorite = () => {
-    setFavorite(!favorite);
-    dispatch(toggleFavoriteBook(book));
-  };
 
   const onHandleSetBook = () => {
     dispatch(setBookDetail(book));
   };
-
-  useEffect(() => {
-    if (allowAddFavorites && favoriteBooks[book.id]) {
-      setFavorite(true);
-    }
-  }, [book.id, favoriteBooks, allowAddFavorites]);
 
   return (
     <div className='moleskine-wrapper rounded-md'>
       <div className='moleskine-notebook rounded-md relative'>
         <Link
           onClick={onHandleSetBook}
-          to={allowAddFavorites ? `/book/${book.id}` : '/'}
+          to={
+            allowAddFavorites ? `/book/${book.id.replace('/works/', '')}` : '/'
+          }
           className='notebook-cover blue'
         >
           <div className='notebook-skin'>
@@ -53,21 +41,10 @@ const Book = ({ book, allowAddFavorites }: BookProps) => {
           </div>
         </Link>
         <div className='notebook-page dotted'>
-          {allowAddFavorites && (
-            <div
-              className='absolute right-3 bottom-3 cursor-pointer'
-              onClick={e => {
-                e.stopPropagation();
-                onHandleFavorite();
-              }}
-            >
-              {favorite ? (
-                <MdOutlineFavorite color='#6c63ff' size={35} />
-              ) : (
-                <MdFavoriteBorder color='#6c63ff' size={35} />
-              )}
-            </div>
-          )}
+          <FavoriteButton
+            allowAddFavorites={allowAddFavorites ?? false}
+            book={book}
+          />
         </div>
       </div>
     </div>

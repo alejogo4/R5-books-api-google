@@ -1,4 +1,6 @@
+import Button from '@components/Button/Button';
 import CommentsList from '@components/Comments/Comments';
+import FavoriteButton from '@components/Favorite/Favorite';
 import { addComment } from '@store/actions/commentsActions';
 import { useAppDispatch, useAppSelector } from '@store/index';
 import React, { useState } from 'react';
@@ -15,7 +17,6 @@ const BookDetail: React.FC = () => {
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     setComment(event.target.value);
-  
   };
 
   const handleCommentSubmit = () => {
@@ -32,7 +33,8 @@ const BookDetail: React.FC = () => {
     <>
       {book && (
         <div className='max-w-4xl mx-auto p-4 my-4 items-center'>
-          <div className='bg-white shadow-2xl rounded-lg overflow-hidden'>
+          <div className='bg-white shadow-2xl rounded-lg overflow-hidden relative'>
+            <FavoriteButton allowAddFavorites={true} book={book} className='top-4 right-4' />
             <div className='p-4'>
               <h1 className='text-2xl font-bold mb-2'>
                 {book.volumeInfo.title}
@@ -75,17 +77,18 @@ const BookDetail: React.FC = () => {
                 value={comment}
                 onChange={handleCommentChange}
               />
-              <button
-                className='px-4 py-2 bg-blue-500 text-white rounded'
+              <Button
+                variant='primary'
+                disabled={!comment}
                 onClick={handleCommentSubmit}
               >
                 Submit Comment
-              </button>
+              </Button>
             </div>
           </div>
         </div>
       )}
-      <CommentsList bookId={id ?? ''}/>
+      <CommentsList bookId={id ?? ''} />
     </>
   );
 };

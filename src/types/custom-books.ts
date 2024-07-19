@@ -75,7 +75,7 @@ export interface DocsItem {
 
 const mapToItemBook = (docsItem: DocsItem): ItemBook => ({
   kind: 'book',
-  id: docsItem.author_key && docsItem.author_key[0],
+  id: docsItem.key,
   etag: docsItem._version_.toString(),
   selfLink: `https://openlibrary.org${docsItem.key}`,
   volumeInfo: {
