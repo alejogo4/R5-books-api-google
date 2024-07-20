@@ -1,7 +1,7 @@
 import Button from '@components/Button/Button';
 import { setSearchTerm } from '@store/actions/searchActions';
 import { useAppDispatch } from '@store/index';
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, KeyboardEvent } from 'react';
 import './SearchInput.css';
 
 
@@ -13,7 +13,10 @@ const SearchInput = () => {
     setSearchValue(event.target.value);
   }
 
-  const handleSearchBooks = ()=>{
+  const handleSearchBooks = (event?: KeyboardEvent<HTMLInputElement> | undefined)=>{
+    if (event && event.key !== 'Enter') {
+      return;
+    }
     dispatch(setSearchTerm(searchValue));
   }
 
@@ -27,8 +30,9 @@ const SearchInput = () => {
           placeholder='Buscar un libro'
           value={searchValue}
           onChange={handleInputChange}
+          onKeyDown={handleSearchBooks} 
         />
-        <Button variant='primary' onClick={handleSearchBooks}>
+        <Button variant='primary' onClick={()=>handleSearchBooks()}>
           Buscar
         </Button>
       </div>
