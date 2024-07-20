@@ -22,6 +22,10 @@ The idea is to fork this repository and create a personal one, which should be s
 3. Create a repository on GitHub/GitLab/Bitbucket/other and keep uploading the commits.
 
 
+### Deployed Project
+You can view the deployed project at: [Your Deployed Project URL](https://r5-books-api.netlify.app/)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
