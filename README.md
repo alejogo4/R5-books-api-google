@@ -1,3 +1,27 @@
+# Challenge: Library
+
+## Objective
+Refactor the project provided by R5, implementing the Google Books API and an additional public API for book searches.
+
+### Repository with code to refactor:
+[https://github.com/cfvargas/R5-test/tree/master/src](https://github.com/cfvargas/R5-test/tree/master/src)
+
+The idea is to fork this repository and create a personal one, which should be shared with the R5 team upon completion of the test with the code of the exercise.
+
+## Proposed Scope
+- Perform searches from the route `/`, which should query the Google Books API.
+- Perform searches from the route `/bookstore`, which should query another book API (any other API can be used).
+- On the `/` route, the user can only see the book results and cannot perform any other actions.
+- On the `/bookstore` route, the user can view the book details, add to favorites, and write a comment (the last two saved locally).
+- Implement tests for the created routes.
+- Refactor the tests created in the project.
+
+## Technical Requirements
+1. Develop with React 17.
+2. Any library for routing can be used.
+3. Create a repository on GitHub/GitLab/Bitbucket/other and keep uploading the commits.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
