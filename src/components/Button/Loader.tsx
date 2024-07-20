@@ -1,5 +1,5 @@
 export const Loader = () => (
-  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24" data-testid='loading'>
     <circle
       className="opacity-0"
       cx="12"

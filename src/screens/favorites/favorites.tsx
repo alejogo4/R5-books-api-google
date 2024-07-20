@@ -5,7 +5,8 @@ import React, { useMemo } from 'react';
 import { ItemBook } from 'types/book';
 
 const Favorites = () => {
-  const { favoriteBooks } = useAppSelector(state => state.user);
+  const state = useAppSelector(state => state.user || {});
+  const { favoriteBooks = {} } = state;
 
   const favoriteBooksArray: ItemBook[] = useMemo(() => {
     return Object.values(favoriteBooks);

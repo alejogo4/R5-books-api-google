@@ -17,10 +17,11 @@ const useSearchBooks = ({
   fetchBooksAction,
   initialTitle = 'javascript'
 }: UseBooksHookParams) => {
- 
   const [response, setResponse] = useState<Response>();
   const dispatch = useAppDispatch();
-  const { books, loading } = useAppSelector(state => state.books);
+  const { books = { items: null }, loading } = useAppSelector(
+    state => state.books
+  );
   const { term } = useAppSelector(state => state.search);
 
   const getBooks = async (title: string = initialTitle) => {
@@ -31,7 +32,7 @@ const useSearchBooks = ({
     if (term) {
       getBooks(term);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [term]);
 
   useEffect(() => {

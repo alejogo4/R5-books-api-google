@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { RootState } from '@store/index'; // Asegúrate de que la ruta sea correcta
-import rootReducer from '@store/reducers'; // Asegúrate de que la ruta sea correcta
+import { RootState } from '@store/index'; 
+import rootReducer from '@store/reducers';
 import type { RenderOptions } from '@testing-library/react';
 import { render } from '@testing-library/react';
 import React, { PropsWithChildren } from 'react';
