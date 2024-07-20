@@ -27,6 +27,7 @@ const Book = ({ book, allowAddFavorites }: BookProps) => {
             allowAddFavorites ? `/book/${book.id.replace('/works/', '')}` : '/'
           }
           className='notebook-cover blue'
+          data-testid='book-link'
         >
           <div className='notebook-skin'>
             {book.volumeInfo.imageLinks ? (

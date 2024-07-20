@@ -5,7 +5,6 @@ import useSearchBooks from '@screens/hooks/useSearchBooks';
 import { fetchBooks } from '@store/actions/books';
 import React from 'react';
 
-
 const BooksList = () => {
   const { response, loading, getBooks } = useSearchBooks({
     fetchBooksAction: fetchBooks
@@ -19,12 +18,18 @@ const BooksList = () => {
   return (
     <>
       <SearchInput />
+
       {loading && (
-        <div className='flex items-center justify-center py-6' data-testid='loading'>
+        <div
+          className='flex items-center justify-center py-6'
+          data-testid='loading'
+        >
           <Loading rows={5} columns={5} width={150} height={200} padding={20} />
         </div>
       )}
-      {response?.data && <Books allowAddFavorites={false} books={response.data.items} />}
+      {response?.data && (
+        <Books allowAddFavorites={false} books={response.data.items} />
+      )}
     </>
   );
 };

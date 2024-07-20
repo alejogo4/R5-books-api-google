@@ -20,7 +20,7 @@ const CommentsList: React.FC<CommentProps> = ({ bookId }) => {
       <h2 className='text-2xl font-bold mb-4'>Comments</h2>
       <div className='bg-white shadow-2xl rounded-lg overflow-hidden'>
         {comments.length === 0 ? (
-          <div className='p-4 text-gray-700'>
+          <div className='p-4 text-gray-700' data-testid='empty-state-comments'>
             No comments yet. Be the first to comment!
           </div>
         ) : (

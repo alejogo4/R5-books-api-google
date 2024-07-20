@@ -1,14 +1,13 @@
 import { toggleFavoriteBook } from '@store/actions/userActions';
 import { useAppDispatch, useAppSelector } from '@store/index';
 import React, { useState, useEffect, MouseEvent } from 'react';
-
 import { MdOutlineFavorite, MdFavoriteBorder } from 'react-icons/md';
 import { ItemBook } from 'types/book';
 
 interface FavoriteButtonProps {
   allowAddFavorites: boolean;
   book: ItemBook;
-  className?: string
+  className?: string;
 }
 
 const FavoriteButton: React.FC<FavoriteButtonProps> = ({
@@ -18,7 +17,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
 }) => {
   const [favorite, setFavorite] = useState(false);
   const dispatch = useAppDispatch();
-  const { favoriteBooks } = useAppSelector(state => state.user);
+  const { favoriteBooks = {} } = useAppSelector(state => state.user);
 
   const onHandleFavorite = (e: MouseEvent) => {
     e.stopPropagation();
@@ -27,7 +26,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
   };
 
   useEffect(() => {
-    if (allowAddFavorites && favoriteBooks[book.id]) {
+    if (allowAddFavorites && book.id && favoriteBooks[book.id]) {
       setFavorite(true);
     }
   }, [book.id, favoriteBooks, allowAddFavorites]);
@@ -38,6 +37,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
         <div
           className={`absolute right-3 bottom-3 cursor-pointer ${className}`}
           onClick={onHandleFavorite}
+          data-testid='favorite-icon'
         >
           {favorite ? (
             <MdOutlineFavorite color='#6c63ff' size={35} />

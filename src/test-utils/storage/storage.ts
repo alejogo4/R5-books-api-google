@@ -11,7 +11,7 @@ export const mockBookDetail: ItemBook = {
     authors: ['Andy Vickler'],
     publisher: 'Ladoo Publishing LLC',
     publishedDate: '2021',
-    description: '',
+    description: 'Js Description',
     industryIdentifiers: [
       {
         type: 'ISBN_13',

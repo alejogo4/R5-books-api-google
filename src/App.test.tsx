@@ -32,12 +32,11 @@ describe('App: Suite', () => {
       books: { ...stateInitial.books, loading: true }
     };
 
-    console.log(state)
     RenderWithStorage(<App />, {
       preloadedState: state
     });
-    
-    const loading =  screen.getByTestId('loading');
+
+    const loading = screen.getByTestId('loading');
     expect(loading).toBeInTheDocument();
   });
 });
