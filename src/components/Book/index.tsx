@@ -1,4 +1,5 @@
 import FavoriteButton from '@components/Favorite/Favorite';
+import { Paragraphs } from '@components/Typography';
 import { setBookDetail } from '@store/actions/books';
 import { useAppDispatch } from '@store/index';
 import React from 'react';
@@ -30,16 +31,22 @@ const Book = ({ book, allowAddFavorites }: BookProps) => {
           data-testid='book-link'
         >
           <div className='notebook-skin'>
+            <Paragraphs
+              fontSize='xs'
+              className='mb-1 overflow-hidden whitespace-nowrap text-ellipsis text-dark'
+            >
+              {' '}
+              {book.volumeInfo.title}
+            </Paragraphs>
             {book.volumeInfo.imageLinks ? (
               <img
                 alt={book.volumeInfo.title}
                 src={book.volumeInfo.imageLinks.thumbnail}
-                className='rounded-md w-full'
+                className='rounded-md w-full max-h-[90%]'
               />
             ) : (
               <img src='https://picsum.photos/200/260' alt='default' />
             )}
-            <p>{book.volumeInfo.title}</p>
           </div>
         </Link>
         <div className='notebook-page dotted'>

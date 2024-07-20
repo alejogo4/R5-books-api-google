@@ -86,7 +86,7 @@ const mapToItemBook = (docsItem: DocsItem): ItemBook => ({
     description: docsItem.first_sentence
       ? docsItem.first_sentence.join(' ')
       : '',
-    industryIdentifiers: docsItem.isbn.map(isbn => ({
+    industryIdentifiers: docsItem.isbn && docsItem.isbn.map(isbn => ({
       type: 'ISBN_13',
       identifier: isbn
     })),

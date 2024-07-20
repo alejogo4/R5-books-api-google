@@ -24,7 +24,7 @@ const BooksList = () => {
           className='flex items-center justify-center py-6'
           data-testid='loading'
         >
-          <Loading rows={5} columns={5} width={150} height={200} padding={20} />
+          <Loading rows={5} columns={5} width={200} height={260} padding={30} />
         </div>
       )}
       {response?.data && (
