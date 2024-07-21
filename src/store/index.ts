@@ -7,7 +7,7 @@ import rootReducer from './reducers';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['comments','user']
+  whitelist: ['comments','user', 'books']
 };
 
 export const persistedReducer = persistReducer(persistConfig, rootReducer);
