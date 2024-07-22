@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
-interface NavItem {
-  name: string;
-  href: string;
-}
+import NavItem from 'types/menu';
 
 interface NavbarProps {
   items: NavItem[];
