@@ -23,7 +23,7 @@ The idea is to fork this repository and create a personal one, which should be s
 
 
 ### Deployed Project
-You can view the deployed project at: [Your Deployed Project URL](https://r5-books-api.netlify.app/)
+You can view the deployed project at: [R5 books](https://r5-books-api.netlify.app/)
 
 
 # Getting Started with Create React App
