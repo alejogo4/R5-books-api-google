@@ -6,14 +6,9 @@ import { fetchBooks } from '@store/actions/books';
 import React from 'react';
 
 const BooksList = () => {
-  const { response, loading, getBooks } = useSearchBooks({
+  const { response, loading } = useSearchBooks({
     fetchBooksAction: fetchBooks
   });
-
-  React.useEffect(() => {
-    getBooks();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <>

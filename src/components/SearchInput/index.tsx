@@ -1,13 +1,16 @@
 import Button from '@components/Button/Button';
 import { setSearchTerm } from '@store/actions/searchActions';
-import { useAppDispatch } from '@store/index';
+import { useAppDispatch, useAppSelector } from '@store/index';
 import React, { ChangeEvent, KeyboardEvent } from 'react';
 import './SearchInput.css';
 
 
 const SearchInput = () => {
   const dispatch = useAppDispatch();
-  const [searchValue, setSearchValue] = React.useState('');
+  const { term } = useAppSelector(state => state.search);
+
+
+  const [searchValue, setSearchValue] = React.useState(term);
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
     setSearchValue(event.target.value);
